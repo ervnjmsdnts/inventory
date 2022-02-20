@@ -2,10 +2,9 @@ import { Disclosure } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { BiStats, BiCategoryAlt } from "react-icons/bi";
-import { HiOutlineCube } from "react-icons/hi";
+import { HiOutlineCube, HiOutlineShoppingCart } from "react-icons/hi";
 import { IoMdPaper } from "react-icons/io";
 import { FiChevronDown } from "react-icons/fi";
-import { RiShoppingCartLine } from "react-icons/ri";
 import { FaCubes } from "react-icons/fa";
 
 const Sidebar: React.FC = ({ children }) => {
@@ -69,33 +68,31 @@ const SidebarMenu: React.FC = () => {
                 <FiChevronDown />
               </div>
             </Disclosure.Button>
-            <Disclosure.Panel className="flex bg-white">
-              <div className="w-full">
-                <Link href="/category">
-                  <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
-                    <div className="px-4">
-                      <BiCategoryAlt size={24} />
-                    </div>
-                    Category
-                  </a>
-                </Link>
-                <Link href="/ingredient">
-                  <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
-                    <div className="px-4">
-                      <IoMdPaper size={24} />
-                    </div>
-                    Ingredient
-                  </a>
-                </Link>
-                <Link href="/product">
-                  <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
-                    <div className="px-4">
-                      <HiOutlineCube size={24} />
-                    </div>
-                    Product
-                  </a>
-                </Link>
-              </div>
+            <Disclosure.Panel className="flex flex-col bg-white">
+              <Link href="/category">
+                <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
+                  <div className="px-4">
+                    <BiCategoryAlt size={24} />
+                  </div>
+                  Category
+                </a>
+              </Link>
+              <Link href="/ingredient">
+                <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
+                  <div className="px-4">
+                    <IoMdPaper size={24} />
+                  </div>
+                  Ingredient
+                </a>
+              </Link>
+              <Link href="/product">
+                <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
+                  <div className="px-4">
+                    <HiOutlineCube size={24} />
+                  </div>
+                  Product
+                </a>
+              </Link>
             </Disclosure.Panel>
           </>
         )}
@@ -104,7 +101,7 @@ const SidebarMenu: React.FC = () => {
       <Link href="/order">
         <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-white">
           <div className="px-4">
-            <RiShoppingCartLine size={24} />
+            <HiOutlineShoppingCart size={24} />
           </div>
           Order
         </a>
