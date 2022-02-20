@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
+import Sidebar from "../components/Sidebar";
 
 const Home: NextPage = () => {
-  return <h1>Hello Next.js</h1>;
+  return <Sidebar>Hello Next Js</Sidebar>;
 };
 
 export default Home;
