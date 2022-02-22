@@ -25,13 +25,14 @@ const SidebarTitle: React.FC = () => {
     <div className="flex justify-evenly items-center pt-4">
       <div className="relative h-16 w-16">
         <Image
-          src="/logo.jpg"
+          src="/logo.png"
           alt="Logo"
           layout="fill"
           className="rounded-full"
+          priority={true}
         />
       </div>
-      <div className="text-center text-brown-dark">
+      <div className="text-center">
         <h2 className="text-2xl font-extrabold uppercase">Cha Bear</h2>
         <h4 className="text-sm">Milktea | Smoothies | Snacks</h4>
       </div>
@@ -43,7 +44,7 @@ const SidebarMenu: React.FC = () => {
   return (
     <div className="flex flex-col">
       <Link href="/">
-        <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-white">
+        <a className="flex items-center font-semibold text-lg p-2 hover:bg-white">
           <div className="px-4">
             <BiStats size={24} />
           </div>
@@ -55,7 +56,7 @@ const SidebarMenu: React.FC = () => {
         {({ open }) => (
           <>
             <Disclosure.Button
-              className={`flex justify-between items-center w-full text-brown-dark p-2 hover:bg-white ${
+              className={`flex justify-between items-center w-full p-2 hover:bg-white ${
                 open ? "bg-white" : ""
               }`}>
               <div className="flex items-center text-brown-dar font-semibold text-lg">
@@ -70,7 +71,7 @@ const SidebarMenu: React.FC = () => {
             </Disclosure.Button>
             <Disclosure.Panel className="flex flex-col bg-white">
               <Link href="/category">
-                <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
+                <a className="flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
                   <div className="px-4">
                     <BiCategoryAlt size={24} />
                   </div>
@@ -78,7 +79,7 @@ const SidebarMenu: React.FC = () => {
                 </a>
               </Link>
               <Link href="/ingredient">
-                <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
+                <a className="flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
                   <div className="px-4">
                     <IoMdPaper size={24} />
                   </div>
@@ -86,7 +87,7 @@ const SidebarMenu: React.FC = () => {
                 </a>
               </Link>
               <Link href="/product">
-                <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
+                <a className="flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
                   <div className="px-4">
                     <HiOutlineCube size={24} />
                   </div>
@@ -99,7 +100,7 @@ const SidebarMenu: React.FC = () => {
       </Disclosure>
       <div className="py-2"></div>
       <Link href="/order">
-        <a className="text-brown-dark flex items-center font-semibold text-lg p-2 hover:bg-white">
+        <a className="flex items-center font-semibold text-lg p-2 hover:bg-white">
           <div className="px-4">
             <HiOutlineShoppingCart size={24} />
           </div>
