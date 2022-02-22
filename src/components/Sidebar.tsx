@@ -6,6 +6,7 @@ import { HiOutlineCube, HiOutlineShoppingCart } from "react-icons/hi";
 import { IoMdPaper } from "react-icons/io";
 import { FiChevronDown } from "react-icons/fi";
 import { FaCubes } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 const Sidebar: React.FC = ({ children }) => {
   return (
@@ -41,6 +42,7 @@ const SidebarTitle: React.FC = () => {
 };
 
 const SidebarMenu: React.FC = () => {
+  const router = useRouter();
   return (
     <div className="flex flex-col">
       <Link href="/">
@@ -71,7 +73,10 @@ const SidebarMenu: React.FC = () => {
             </Disclosure.Button>
             <Disclosure.Panel className="flex flex-col bg-white">
               <Link href="/category">
-                <a className="flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
+                <a
+                  className={`flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark ${
+                    router.asPath === "/category" && "bg-yellow-dark"
+                  }`}>
                   <div className="px-4">
                     <BiCategoryAlt size={24} />
                   </div>
@@ -79,7 +84,10 @@ const SidebarMenu: React.FC = () => {
                 </a>
               </Link>
               <Link href="/ingredient">
-                <a className="flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
+                <a
+                  className={`flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark ${
+                    router.asPath === "/ingredient" && "bg-yellow-dark"
+                  }`}>
                   <div className="px-4">
                     <IoMdPaper size={24} />
                   </div>
@@ -87,7 +95,10 @@ const SidebarMenu: React.FC = () => {
                 </a>
               </Link>
               <Link href="/product">
-                <a className="flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark">
+                <a
+                  className={`flex items-center font-semibold text-lg p-2 hover:bg-yellow-dark ${
+                    router.asPath === "/product" && "bg-yellow-dark"
+                  }`}>
                   <div className="px-4">
                     <HiOutlineCube size={24} />
                   </div>

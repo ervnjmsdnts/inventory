@@ -30,7 +30,6 @@ interface IngredientModal {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   categories?: Category[];
-  categoryId?: string;
 }
 
 const Category = (props: IngredientProps) => {
@@ -367,7 +366,11 @@ export const getServerSideProps = async () => {
       },
     });
 
-    const categoryResults = await prisma.category.findMany();
+    const categoryResults = await prisma.category.findMany({
+      where: {
+        status: "ONGOING",
+      },
+    });
 
     const ingredients = JSON.parse(JSON.stringify(ingredientResults));
 
