@@ -34,7 +34,7 @@ const Category = (props: CategoryProps) => {
 };
 
 const CategoryHeader = () => {
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
@@ -212,7 +212,7 @@ const UpdateCategoryModal: React.FC<CategoryModal> = ({
   setIsOpen,
   category,
 }) => {
-  const { register, handleSubmit, setValue } = useForm<CategoryInput>({});
+  const { register, handleSubmit, setValue } = useForm<CategoryInput>();
   const router = useRouter();
 
   useEffect(() => {
@@ -254,14 +254,14 @@ const UpdateCategoryModal: React.FC<CategoryModal> = ({
             <div className="flex">
               <input
                 type="text"
-                className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
+                className="w-1/2 bg-gray-100 text-gray-900 rounded-md px-2 h-12 mt-2"
                 placeholder="Enter category name"
                 {...register("name", { required: true })}
               />
               <div className="px-2"></div>
               <select
                 {...register("status")}
-                className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
+                className="w-1/2 bg-gray-100 text-gray-900 rounded-md px-2 h-12 mt-2">
                 <option value="ONGOING">ONGOING</option>
                 <option value="STOPPED">STOPPED</option>
               </select>
@@ -278,7 +278,7 @@ const UpdateCategoryModal: React.FC<CategoryModal> = ({
   );
 };
 
-export async function getServerSideProps() {
+export const getServerSideProps = async () => {
   try {
     const result = await prisma.category.findMany();
 
@@ -290,6 +290,6 @@ export async function getServerSideProps() {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export default Category;
