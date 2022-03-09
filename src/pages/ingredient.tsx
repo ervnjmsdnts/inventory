@@ -373,7 +373,6 @@ export const getServerSideProps = async () => {
     });
 
     const ingredients = JSON.parse(JSON.stringify(ingredientResults));
-
     const categories = JSON.parse(JSON.stringify(categoryResults));
 
     return {
