@@ -46,7 +46,10 @@ const SidebarMenu: React.FC = () => {
   return (
     <div className="flex flex-col">
       <Link href="/">
-        <a className="flex items-center font-semibold text-lg p-2 hover:bg-white">
+        <a
+          className={`flex items-center font-semibold text-lg p-2 hover:bg-white ${
+            router.asPath === "/" && "bg-yellow-dark"
+          }`}>
           <div className="px-4">
             <BiStats size={24} />
           </div>
@@ -111,7 +114,10 @@ const SidebarMenu: React.FC = () => {
       </Disclosure>
       <div className="py-2"></div>
       <Link href="/order">
-        <a className="flex items-center font-semibold text-lg p-2 hover:bg-white">
+        <a
+          className={`flex items-center font-semibold text-lg p-2 hover:bg-white ${
+            router.asPath === "/order" && "bg-yellow-dark"
+          }`}>
           <div className="px-4">
             <HiOutlineShoppingCart size={24} />
           </div>

@@ -163,7 +163,7 @@ const OrderTable = (props: OrderProps) => {
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
-                      Number of Items
+                      No. of Items
                     </th>
                     <th
                       scope="col"
