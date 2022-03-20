@@ -1,4 +1,4 @@
-import { Category } from "@prisma/client";
+import { Category } from "../../../node_modules/.prisma/client";
 import axios, { AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
