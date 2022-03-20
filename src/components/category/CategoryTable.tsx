@@ -1,4 +1,3 @@
-import { Category } from "../../../node_modules/.prisma/client";
 import axios, { AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
@@ -10,7 +9,7 @@ import { UpdateCategoryModal } from "./CategoryModals";
 
 const CategoryTable = (props: CategoryProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [category, setCategory] = useState<Category>();
+  const [category, setCategory] = useState<any>();
   const router = useRouter();
 
   const deleteCategory = async (id: string) => {
