@@ -13,7 +13,7 @@ import { SalesData, OrderProps } from "../../types";
 const SalesChart = (props: OrderProps) => {
   const data: SalesData[] = [];
 
-  props.orders?.forEach((order) => {
+  props.orders?.forEach((order: any) => {
     const date = dayjs(order.createdAt).format("MMM DD, YYYY");
     const found = data.find((d: any) => d.date === date);
     if (found) {
