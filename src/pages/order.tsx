@@ -15,6 +15,9 @@ const Order = (props: OrderProps) => {
 export const getServerSideProps = async () => {
   try {
     const orderResults = await prisma.order.findMany({
+      where: {
+        isActive: true,
+      },
       include: {
         product: {
           select: {

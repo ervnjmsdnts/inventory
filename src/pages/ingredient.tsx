@@ -18,6 +18,9 @@ const Ingredient = (props: IngredientProps) => {
 export const getServerSideProps = async () => {
   try {
     const ingredientResults = await prisma.ingredient.findMany({
+      where: {
+        isActive: true,
+      },
       include: {
         Category: {
           select: {

@@ -1,10 +1,5 @@
-import { Category, CategoryStatus } from "@prisma/client";
+import { Category } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
-import { ErrorStatus, OkayStatus } from "../components/Status";
-import { useEffect, useState } from "react";
-import { Dialog } from "@headlessui/react";
-import { BiPlus } from "react-icons/bi";
-import axios, { AxiosRequestConfig } from "axios";
 import CategoryHeader from "../components/category/CategoryHeader";
 import CategoryTable from "../components/category/CategoryTable";
 import { CategoryProps } from "../types";
@@ -20,7 +15,11 @@ const Category = (props: CategoryProps) => {
 
 export const getServerSideProps = async () => {
   try {
-    const result = await prisma.category.findMany();
+    const result = await prisma.category.findMany({
+      where: {
+        isActive: true,
+      },
+    });
 
     const categories = JSON.parse(JSON.stringify(result));
 

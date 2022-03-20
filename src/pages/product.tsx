@@ -20,7 +20,11 @@ const Product = (props: ProductProps) => {
 
 export const getServerSideProps = async () => {
   try {
-    const productResults = await prisma.product.findMany();
+    const productResults = await prisma.product.findMany({
+      where: {
+        isActive: true,
+      },
+    });
 
     const products = JSON.parse(JSON.stringify(productResults));
 
