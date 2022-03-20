@@ -11,7 +11,7 @@ const TopTable = (props: OrderProps) => {
 };
 
 const TopProducts = (props: OrderProps) => {
-  const products = props.orders?.reduce((acc: any, curr) => {
+  const products = props.orders?.reduce((acc: any, curr: any) => {
     if (acc.hasOwnProperty(curr.product.name)) {
       acc[curr.product.name] += curr.numberOfItems;
     } else {
