@@ -1,11 +1,75 @@
-import {
-  Category,
-  CategoryStatus,
-  Ingredient,
-  Order,
-  Product,
-  Status,
-} from "@prisma/client";
+export type Category = {
+  id: string;
+  name: string;
+  status: CategoryStatus;
+  createdAt: Date;
+  updatedAt: Date;
+  isActive: boolean;
+};
+
+/**
+ * Model Ingredient
+ *
+ */
+export type Ingredient = {
+  id: string;
+  name: string;
+  quantity: number;
+  status: Status;
+  categoryId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  isActive: boolean;
+};
+
+/**
+ * Model Product
+ *
+ */
+export type Product = {
+  id: string;
+  name: string;
+  price: number;
+  status: Status;
+  createdAt: Date;
+  updatedAt: Date;
+  isActive: boolean;
+};
+
+/**
+ * Model Order
+ *
+ */
+export type Order = {
+  id: string;
+  customerName: string;
+  productId: string;
+  numberOfItems: number;
+  createdAt: Date;
+  updatedAt: Date;
+  isActive: boolean;
+};
+
+/**
+ * Enums
+ */
+
+// Based on
+// https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
+
+export const CategoryStatus = {
+  ONGOING: "ONGOING",
+  STOPPED: "STOPPED",
+};
+
+export type CategoryStatus = typeof CategoryStatus[keyof typeof CategoryStatus];
+
+export const Status = {
+  AVAILABLE: "AVAILABLE",
+  NOTAVAILABLE: "NOTAVAILABLE",
+};
+
+export type Status = typeof Status[keyof typeof Status];
 
 interface OrderProduct extends Order {
   product: Product;
