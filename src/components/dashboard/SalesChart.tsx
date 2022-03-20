@@ -8,12 +8,12 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
-import { SalesData, SalesProps } from "../../types";
+import { SalesData, OrderProps } from "../../types";
 
-const SalesChart = (props: SalesProps) => {
+const SalesChart = (props: OrderProps) => {
   const data: SalesData[] = [];
 
-  props.orders.forEach((order) => {
+  props.orders?.forEach((order) => {
     const date = dayjs(order.createdAt).format("MMM DD, YYYY");
     const found = data.find((d: any) => d.date === date);
     if (found) {
@@ -26,8 +26,12 @@ const SalesChart = (props: SalesProps) => {
     }
   });
 
+  data.sort((a, b) => {
+    return dayjs(a.date).isBefore(dayjs(b.date)) ? -1 : 1;
+  });
+
   return (
-    <div>
+    <div className="mb-4">
       <h1 className="font-bold text-2xl mb-4">Sales Chart</h1>
       <ResponsiveContainer width="100%" height={350}>
         <AreaChart data={data}>

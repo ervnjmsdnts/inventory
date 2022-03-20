@@ -1,7 +1,7 @@
-import { SalesProps } from "../../types";
+import { OrderProps } from "../../types";
 import TableLayout from "../TableLayout";
 
-const TopTable = (props: SalesProps) => {
+const TopTable = (props: OrderProps) => {
   return (
     <div className="flex justify-around">
       <TopProducts orders={props.orders} />
@@ -10,8 +10,8 @@ const TopTable = (props: SalesProps) => {
   );
 };
 
-const TopProducts = (props: SalesProps) => {
-  const products = props.orders.reduce((acc: any, curr) => {
+const TopProducts = (props: OrderProps) => {
+  const products = props.orders?.reduce((acc: any, curr) => {
     if (acc.hasOwnProperty(curr.product.name)) {
       acc[curr.product.name] += curr.numberOfItems;
     } else {
@@ -65,12 +65,12 @@ const TopProducts = (props: SalesProps) => {
   );
 };
 
-const TopOrders = (props: SalesProps) => {
-  const orders = props.orders.sort((a, b) => {
+const TopOrders = (props: OrderProps) => {
+  const orders = props.orders?.sort((a, b) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
-  const topOrders = orders.slice(0, 5);
+  const topOrders = orders?.slice(0, 5);
   return (
     <div>
       <h2 className="text-lg font-semibold mb-2">New Orders</h2>
@@ -100,7 +100,7 @@ const TopOrders = (props: SalesProps) => {
           </tr>
         </thead>
         <tbody className="bg-white w-full divide-y divide-gray-200">
-          {topOrders.map((order) => (
+          {topOrders?.map((order) => (
             <tr key={order.id}>
               <td className="px-6 py-4 whitespace-no-wrap">
                 <div className="flex items-center">
@@ -123,7 +123,7 @@ const TopOrders = (props: SalesProps) => {
               </td>
               <td className="px-6 py-4 whitespace-no-wrap">
                 <div className="text-sm leading-5 text-gray-900">
-                  &#x20B1;{order.product.price}
+                  &#x20B1;{order.product.price * order.numberOfItems}
                 </div>
               </td>
             </tr>

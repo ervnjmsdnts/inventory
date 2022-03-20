@@ -1,11 +1,11 @@
-import { SalesProps } from "../../types";
+import { OrderProps } from "../../types";
 
-const Earning = (props: SalesProps) => {
+const Earning = (props: OrderProps) => {
   return (
-    <div className="bg-gradient-to-r from-yellow-light to-[#fffced] max-w-md p-4 rounded-md">
+    <div className="bg-gradient-to-r from-yellow-light to-[#fffced] max-w-md p-4 rounded-md mb-4">
       <h1 className="text-2xl font-semibold">
         &#x20B1;
-        {props.orders.reduce(
+        {props.orders?.reduce(
           (acc, order) => acc + order.product.price * order.numberOfItems,
           0
         )}

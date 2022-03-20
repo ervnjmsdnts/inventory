@@ -2,15 +2,13 @@ import { prisma } from "../../lib/prisma";
 import Earning from "../components/dashboard/Earning";
 import SalesChart from "../components/dashboard/SalesChart";
 import TopTable from "../components/dashboard/TopTable";
-import { SalesProps } from "../types";
+import { OrderProps } from "../types";
 
-const Dashboard = (props: SalesProps) => {
+const Dashboard = (props: OrderProps) => {
   return (
     <div className="flex flex-col mx-auto w-3/4 h-screen p-4">
       <Earning orders={props.orders} />
-      <div className="m-2"></div>
       <SalesChart orders={props.orders} />
-      <div className="m-2"></div>
       <TopTable orders={props.orders} />
     </div>
   );
