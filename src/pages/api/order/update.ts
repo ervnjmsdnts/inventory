@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../../lib/prisma";
 
-export default async function updateProduct(
+export default async function updateOrder(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -10,18 +10,18 @@ export default async function updateProduct(
   }
 
   try {
-    let { id, name, price, status } = req.body;
+    let { id, customerName, productId, numberOfItems } = req.body;
 
-    price = Number(price);
+    numberOfItems = Number(numberOfItems);
 
-    const savedProduct = await prisma.product.update({
+    const savedOrder = await prisma.order.update({
       where: {
         id: id,
       },
-      data: { name, price, status },
+      data: { customerName, productId, numberOfItems },
     });
 
-    return res.status(200).json({ savedProduct });
+    return res.status(200).json({ savedOrder });
   } catch (error) {
     return res.status(500).json({ error: error });
   }

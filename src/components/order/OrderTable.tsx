@@ -1,8 +1,14 @@
+import { Order } from "@prisma/client";
 import dayjs from "dayjs";
+import { useState } from "react";
 import { OrderProps } from "../../types";
 import TableLayout from "../TableLayout";
+import { UpdateOrderModal } from "./OrderModals";
 
 const OrderTable = (props: OrderProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [order, setOrder] = useState<Order>();
+
   return (
     <>
       <TableLayout>
@@ -37,6 +43,9 @@ const OrderTable = (props: OrderProps) => {
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
               Created At
+            </th>
+            <th scope="col" className="relative px-6 py-3">
+              <span className="sr-only">Edit</span>
             </th>
           </tr>
         </thead>
@@ -73,10 +82,27 @@ const OrderTable = (props: OrderProps) => {
                   {dayjs(order.createdAt).format("MMMM DD, YYYY")}
                 </div>
               </td>
+              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <button
+                  onClick={() => {
+                    setIsOpen(true);
+                    setOrder(order);
+                  }}
+                  type="button"
+                  className="text-indigo-600 hover:text-indigo-900">
+                  Edit
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
       </TableLayout>
+      <UpdateOrderModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        order={order}
+        products={props.products}
+      />
     </>
   );
 };

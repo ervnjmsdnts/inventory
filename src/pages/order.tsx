@@ -7,7 +7,7 @@ const Order = (props: OrderProps) => {
   return (
     <div className="flex flex-col mx-auto">
       <OrderHeader products={props.products} />
-      <OrderTable orders={props.orders} />
+      <OrderTable orders={props.orders} products={props.products} />
     </div>
   );
 };
