@@ -1,4 +1,3 @@
-import { Ingredient } from "@prisma/client";
 import axios, { AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
@@ -10,7 +9,7 @@ import { UpdateIngredientModal } from "./IngredientModals";
 
 const IngredientTable = (props: IngredientProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [ingredient, setIngredient] = useState<Ingredient>();
+  const [ingredient, setIngredient] = useState<any>();
   const router = useRouter();
 
   const deleteIngredient = async (id: string) => {

@@ -1,4 +1,3 @@
-import { Order } from "@prisma/client";
 import axios, { AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
@@ -9,7 +8,7 @@ import { UpdateOrderModal } from "./OrderModals";
 
 const OrderTable = (props: OrderProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [order, setOrder] = useState<Order>();
+  const [order, setOrder] = useState<any>();
   const router = useRouter();
 
   const deleteOrder = async (id: string) => {
