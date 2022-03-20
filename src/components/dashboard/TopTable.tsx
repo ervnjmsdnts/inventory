@@ -66,7 +66,7 @@ const TopProducts = (props: OrderProps) => {
 };
 
 const TopOrders = (props: OrderProps) => {
-  const orders = props.orders?.sort((a, b) => {
+  const orders = props.orders?.sort((a: any, b: any) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
