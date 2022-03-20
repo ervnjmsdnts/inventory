@@ -6,7 +6,7 @@ const Earning = (props: OrderProps) => {
       <h1 className="text-2xl font-semibold">
         &#x20B1;
         {props.orders?.reduce(
-          (acc, orders) => acc + orders.product.price * orders.numberOfItems,
+          (acc, order: any) => acc + order.product.price * order.numberOfItems,
           0
         )}
       </h1>
