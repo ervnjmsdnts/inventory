@@ -100,7 +100,7 @@ const TopOrders = (props: OrderProps) => {
           </tr>
         </thead>
         <tbody className="bg-white w-full divide-y divide-gray-200">
-          {topOrders?.map((order) => (
+          {topOrders?.map((order: any) => (
             <tr key={order.id}>
               <td className="px-6 py-4 whitespace-no-wrap">
                 <div className="flex items-center">
