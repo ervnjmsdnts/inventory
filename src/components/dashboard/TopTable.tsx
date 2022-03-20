@@ -21,7 +21,7 @@ const TopProducts = (props: OrderProps) => {
   }, {});
 
   const topProducts = Object.keys(products)
-    .sort((a, b) => products[b] - products[a])
+    .sort((a: any, b: any) => products[b] - products[a])
     .slice(0, 5);
 
   return (
