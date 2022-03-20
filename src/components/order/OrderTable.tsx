@@ -72,7 +72,7 @@ const OrderTable = (props: OrderProps) => {
           </tr>
         </thead>
         <tbody className="bg-white w-full divide-y divide-gray-200">
-          {props.orders?.map((order) => (
+          {props.orders?.map((order: any) => (
             <tr key={order.id}>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900">

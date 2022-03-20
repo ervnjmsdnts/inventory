@@ -1,4 +1,3 @@
-import { Product } from "@prisma/client";
 import axios, { AxiosRequestConfig } from "axios";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
@@ -10,7 +9,7 @@ import { UpdateProductModal } from "./ProductModals";
 
 const ProductTable = (props: ProductProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [product, setProduct] = useState<Product>();
+  const [product, setProduct] = useState<any>();
   const router = useRouter();
 
   const deleteProduct = async (id: string) => {

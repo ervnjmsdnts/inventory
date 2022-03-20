@@ -73,7 +73,7 @@ const IngredientTable = (props: IngredientProps) => {
           </tr>
         </thead>
         <tbody className="bg-white w-full divide-y divide-gray-200">
-          {props.ingredients?.map((ingredient) => (
+          {props.ingredients?.map((ingredient: any) => (
             <tr key={ingredient.id}>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900">
