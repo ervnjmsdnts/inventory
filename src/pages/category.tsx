@@ -1,4 +1,3 @@
-import { Category } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
 import CategoryHeader from "../components/category/CategoryHeader";
 import CategoryTable from "../components/category/CategoryTable";

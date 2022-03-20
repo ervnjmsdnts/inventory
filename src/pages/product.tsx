@@ -1,9 +1,3 @@
-import { BiPlus } from "react-icons/bi";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useRouter } from "next/router";
-import axios, { AxiosRequestConfig } from "axios";
-import { Dialog } from "@headlessui/react";
-import { useEffect, useState } from "react";
 import { prisma } from "../../lib/prisma";
 import { ProductProps } from "../types";
 import ProductHeader from "../components/product/ProductHeader";
