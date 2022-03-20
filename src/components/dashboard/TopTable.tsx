@@ -5,7 +5,7 @@ const TopTable = (props: SalesProps) => {
   return (
     <div className="flex justify-around">
       <TopProducts orders={props.orders} />
-      <TopOrders />
+      <TopOrders orders={props.orders} />
     </div>
   );
 };
@@ -65,10 +65,15 @@ const TopProducts = (props: SalesProps) => {
   );
 };
 
-const TopOrders = () => {
+const TopOrders = (props: SalesProps) => {
+  const orders = props.orders.sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
+
+  const topOrders = orders.slice(0, 5);
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-2">Top Orders</h2>
+      <h2 className="text-lg font-semibold mb-2">New Orders</h2>
       <TableLayout>
         <thead className="bg-yellow-dark">
           <tr>
@@ -94,7 +99,36 @@ const TopOrders = () => {
             </th>
           </tr>
         </thead>
-        <tbody className="bg-white w-full divide-y divide-gray-200"></tbody>
+        <tbody className="bg-white w-full divide-y divide-gray-200">
+          {topOrders.map((order) => (
+            <tr key={order.id}>
+              <td className="px-6 py-4 whitespace-no-wrap">
+                <div className="flex items-center">
+                  <div className="text-sm leading-5 font-medium text-gray-900">
+                    {order.customerName}
+                  </div>
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-no-wrap">
+                <div className="flex items-center">
+                  <div className="text-sm leading-5 font-medium text-gray-900">
+                    {order.product.name}
+                  </div>
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-no-wrap">
+                <div className="text-sm leading-5 text-gray-900">
+                  {order.numberOfItems}
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-no-wrap">
+                <div className="text-sm leading-5 text-gray-900">
+                  &#x20B1;{order.product.price}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </TableLayout>
     </div>
   );
