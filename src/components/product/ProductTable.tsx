@@ -15,7 +15,7 @@ const ProductTable = (props: ProductProps) => {
 
   const deleteProduct = async (id: string) => {
     const config: AxiosRequestConfig = {
-      url: "/api/category/delete",
+      url: "/api/product/delete",
       data: { id },
       method: "PUT",
       headers: {

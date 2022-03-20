@@ -14,7 +14,7 @@ const OrderTable = (props: OrderProps) => {
 
   const deleteOrder = async (id: string) => {
     const config: AxiosRequestConfig = {
-      url: "/api/category/delete",
+      url: "/api/order/delete",
       data: { id },
       method: "PUT",
       headers: {
