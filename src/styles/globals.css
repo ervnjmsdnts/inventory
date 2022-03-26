@@ -7,5 +7,9 @@ body {
 }
 
 #nprogress .bar {
-  @apply bg-yellow-dark h-[4px] !important;
+  @apply !bg-yellow-dark !h-[4px];
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #e4b601, 0 0 5px #e4b601 !important;
 }
