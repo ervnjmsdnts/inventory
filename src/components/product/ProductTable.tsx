@@ -6,6 +6,7 @@ import { ProductProps } from "../../types";
 import { ErrorStatus, OkayStatus } from "../Status";
 import TableLayout from "../TableLayout";
 import { UpdateProductModal } from "./ProductModals";
+import NProgress from "nprogress";
 
 const ProductTable = (props: ProductProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,9 +23,12 @@ const ProductTable = (props: ProductProps) => {
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };

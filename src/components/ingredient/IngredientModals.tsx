@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IngredientInput, IngredientModal } from "../../types";
+import NProgress from "nprogress";
 
 export const CreateIngredientModal: React.FC<IngredientModal> = ({
   isOpen,
@@ -23,9 +24,12 @@ export const CreateIngredientModal: React.FC<IngredientModal> = ({
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };
@@ -47,26 +51,26 @@ export const CreateIngredientModal: React.FC<IngredientModal> = ({
                 type="text"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter ingredient name"
-                {...register("name")}
+                {...register("name", { required: true })}
               />
               <div className="px-2"></div>
               <input
                 type="number"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter ingredient quantity"
-                {...register("quantity")}
+                {...register("quantity", { required: true })}
               />
             </div>
             <div className="flex">
               <select
-                {...register("status")}
+                {...register("status", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 <option value="AVAILABLE">AVAILABLE</option>
                 <option value="NOTAVAILABLE">NOTAVAILABLE</option>
               </select>
               <div className="px-2"></div>
               <select
-                {...register("categoryId")}
+                {...register("categoryId", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 {categories?.map((category) => (
                   <option key={category.id} value={category.id}>
@@ -115,9 +119,12 @@ export const UpdateIngredientModal: React.FC<IngredientModal> = ({
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };
@@ -139,26 +146,26 @@ export const UpdateIngredientModal: React.FC<IngredientModal> = ({
                 type="text"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter ingredient name"
-                {...register("name")}
+                {...register("name", { required: true })}
               />
               <div className="px-2"></div>
               <input
                 type="number"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter ingredient quantity"
-                {...register("quantity")}
+                {...register("quantity", { required: true })}
               />
             </div>
             <div className="flex">
               <select
-                {...register("status")}
+                {...register("status", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 <option value="AVAILABLE">AVAILABLE</option>
                 <option value="NOTAVAILABLE">NOTAVAILABLE</option>
               </select>
               <div className="px-2"></div>
               <select
-                {...register("categoryId")}
+                {...register("categoryId", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 {categories?.map((category) => (
                   <option key={category.id} value={category.id}>

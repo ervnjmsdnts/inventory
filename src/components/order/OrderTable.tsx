@@ -5,6 +5,7 @@ import { useState } from "react";
 import { OrderProps } from "../../types";
 import TableLayout from "../TableLayout";
 import { UpdateOrderModal } from "./OrderModals";
+import NProgress from "nprogress";
 
 const OrderTable = (props: OrderProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,9 +22,12 @@ const OrderTable = (props: OrderProps) => {
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };

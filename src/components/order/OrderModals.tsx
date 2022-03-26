@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { OrderInput, OrderModal } from "../../types";
+import NProgress from "nprogress";
 
 export const CreateOrderModal: React.FC<OrderModal> = ({
   isOpen,
@@ -23,9 +24,12 @@ export const CreateOrderModal: React.FC<OrderModal> = ({
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };
@@ -45,11 +49,11 @@ export const CreateOrderModal: React.FC<OrderModal> = ({
                 type="text"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter customer name"
-                {...register("customerName")}
+                {...register("customerName", { required: true })}
               />
               <div className="px-2"></div>
               <select
-                {...register("productId")}
+                {...register("productId", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 {products?.map((product) => (
                   <option value={product.id} key={product.id}>
@@ -62,7 +66,7 @@ export const CreateOrderModal: React.FC<OrderModal> = ({
                 type="number"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter number of items"
-                {...register("numberOfItems")}
+                {...register("numberOfItems", { required: true })}
               />
             </div>
             <button
@@ -106,9 +110,12 @@ export const UpdateOrderModal: React.FC<OrderModal> = ({
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };
@@ -128,11 +135,11 @@ export const UpdateOrderModal: React.FC<OrderModal> = ({
                 type="text"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter customer name"
-                {...register("customerName")}
+                {...register("customerName", { required: true })}
               />
               <div className="px-2"></div>
               <select
-                {...register("productId")}
+                {...register("productId", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 {products?.map((product) => (
                   <option value={product.id} key={product.id}>
@@ -145,7 +152,7 @@ export const UpdateOrderModal: React.FC<OrderModal> = ({
                 type="number"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter number of items"
-                {...register("numberOfItems")}
+                {...register("numberOfItems", { required: true })}
               />
             </div>
             <button

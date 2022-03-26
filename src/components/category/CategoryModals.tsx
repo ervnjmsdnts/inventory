@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CategoryInput, CategoryModal } from "../../types";
+import NProgress from "nprogress";
 
 export const CreateCategoryModal: React.FC<CategoryModal> = ({
   isOpen,
@@ -22,9 +23,12 @@ export const CreateCategoryModal: React.FC<CategoryModal> = ({
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };
@@ -50,7 +54,7 @@ export const CreateCategoryModal: React.FC<CategoryModal> = ({
               />
               <div className="px-2"></div>
               <select
-                {...register("status")}
+                {...register("status", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 <option value="ONGOING">ONGOING</option>
                 <option value="STOPPED">STOPPED</option>
@@ -93,9 +97,12 @@ export const UpdateCategoryModal: React.FC<CategoryModal> = ({
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };

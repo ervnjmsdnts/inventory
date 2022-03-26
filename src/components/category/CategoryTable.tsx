@@ -6,6 +6,7 @@ import { CategoryProps } from "../../types";
 import { ErrorStatus, OkayStatus } from "../Status";
 import TableLayout from "../TableLayout";
 import { UpdateCategoryModal } from "./CategoryModals";
+import NProgress from "nprogress";
 
 const CategoryTable = (props: CategoryProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,9 +23,12 @@ const CategoryTable = (props: CategoryProps) => {
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };

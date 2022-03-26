@@ -6,6 +6,7 @@ import { IngredientProps } from "../../types";
 import { ErrorStatus, OkayStatus } from "../Status";
 import TableLayout from "../TableLayout";
 import { UpdateIngredientModal } from "./IngredientModals";
+import NProgress from "nprogress";
 
 const IngredientTable = (props: IngredientProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,9 +23,12 @@ const IngredientTable = (props: IngredientProps) => {
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };

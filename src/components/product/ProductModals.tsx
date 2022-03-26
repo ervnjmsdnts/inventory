@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ProductInput, ProductModal } from "../../types";
+import NProgress from "nprogress";
 
 export const CreateProductModal: React.FC<ProductModal> = ({
   isOpen,
@@ -22,9 +23,12 @@ export const CreateProductModal: React.FC<ProductModal> = ({
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };
@@ -44,18 +48,18 @@ export const CreateProductModal: React.FC<ProductModal> = ({
                 type="text"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter product name"
-                {...register("name")}
+                {...register("name", { required: true })}
               />
               <div className="px-2"></div>
               <input
                 type="number"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter product price"
-                {...register("price")}
+                {...register("price", { required: true })}
               />
               <div className="px-2"></div>
               <select
-                {...register("status")}
+                {...register("status", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 <option value="AVAILABLE">AVAILABLE</option>
                 <option value="NOTAVAILABLE">NOTAVAILABLE</option>
@@ -99,9 +103,12 @@ export const UpdateProductModal: React.FC<ProductModal> = ({
       },
     };
 
+    NProgress.start();
+
     const result = await axios(config);
 
     if (result.status === 200) {
+      NProgress.done();
       router.reload();
     }
   };
@@ -123,18 +130,18 @@ export const UpdateProductModal: React.FC<ProductModal> = ({
                 type="text"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter product name"
-                {...register("name")}
+                {...register("name", { required: true })}
               />
               <div className="px-2"></div>
               <input
                 type="number"
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2"
                 placeholder="Enter product price"
-                {...register("price")}
+                {...register("price", { required: true })}
               />
               <div className="px-2"></div>
               <select
-                {...register("status")}
+                {...register("status", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 <option value="AVAILABLE">AVAILABLE</option>
                 <option value="NOTAVAILABLE">NOTAVAILABLE</option>
