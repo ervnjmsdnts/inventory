@@ -1,3 +1,5 @@
+import { User, UserRole } from "@prisma/client";
+
 export type Category = {
   id: string;
   name: string;
@@ -131,4 +133,22 @@ export interface OrderModal {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   products?: Product[];
+}
+
+export interface UserProps {
+  users: User[];
+}
+
+export interface UserModal {
+  user?: User | undefined;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
+
+export interface UserInput {
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+  role: UserRole;
 }
