@@ -22,11 +22,11 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
       },
     });
 
-    compare(user.password, savedUser!.password, (err, result) => {
-      if (err) {
-        return res.status(500).json({ error: err });
-      }
+    if (!savedUser) {
+      return res.json({ message: "Invalid credentials" });
+    }
 
+    compare(user.password, savedUser!.password, (err, result) => {
       if (result) {
         const payload = {
           name: savedUser?.firstName,
@@ -37,9 +37,9 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
         return res.status(200).json({ authToken: token });
       }
 
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.json({ message: "Invalid credentials" });
     });
   } catch (error) {
-    return res.status(500).json({ error: error });
+    return res.status(500).json(error);
   }
 }
