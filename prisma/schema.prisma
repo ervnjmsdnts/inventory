@@ -58,6 +58,18 @@ model Order {
   isActive      Boolean  @default(true)
 }
 
+model User {
+  id        String   @id @default(cuid())
+  firstName String   @db.VarChar(255)
+  lastName  String   @db.VarChar(255)
+  username  String   @db.VarChar(255)
+  password  String
+  role      UserRole @default(STAFF)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isActive  Boolean  @default(true)
+}
+
 enum CategoryStatus {
   ONGOING
   STOPPED
@@ -66,4 +78,9 @@ enum CategoryStatus {
 enum Status {
   AVAILABLE
   NOTAVAILABLE
+}
+
+enum UserRole {
+  ADMIN
+  STAFF
 }

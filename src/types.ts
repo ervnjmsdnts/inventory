@@ -7,10 +7,6 @@ export type Category = {
   isActive: boolean;
 };
 
-/**
- * Model Ingredient
- *
- */
 export type Ingredient = {
   id: string;
   name: string;
@@ -22,10 +18,6 @@ export type Ingredient = {
   isActive: boolean;
 };
 
-/**
- * Model Product
- *
- */
 export type Product = {
   id: string;
   name: string;
@@ -36,10 +28,6 @@ export type Product = {
   isActive: boolean;
 };
 
-/**
- * Model Order
- *
- */
 export type Order = {
   id: string;
   customerName: string;
@@ -49,13 +37,6 @@ export type Order = {
   updatedAt: Date;
   isActive: boolean;
 };
-
-/**
- * Enums
- */
-
-// Based on
-// https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 
 export const CategoryStatus = {
   ONGOING: "ONGOING",
