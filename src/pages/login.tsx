@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { UserConsumer } from "../context/authContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NProgress from "nprogress";
 
 const Login = () => {
@@ -11,6 +11,13 @@ const Login = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const auth = UserConsumer();
+
+  useEffect(() => {
+    if (auth.isAuth) {
+      router.push("/");
+    }
+    // eslint-disable-next-line
+  }, [auth.isAuth]);
 
   const onSubmitForm = async (data: any) => {
     const config: AxiosRequestConfig = {

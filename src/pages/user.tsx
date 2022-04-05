@@ -2,6 +2,7 @@ import UserHeader from "../components/user/UserHeader";
 import UserTable from "../components/user/UserTable";
 import { prisma } from "../../lib/prisma";
 import { UserProps } from "../types";
+import { withAuth } from "../util/withAuth";
 
 const User = (props: UserProps) => {
   return (
@@ -12,22 +13,18 @@ const User = (props: UserProps) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  try {
-    const result = await prisma.user.findMany({
-      where: {
-        isActive: true,
-      },
-    });
+export const getServerSideProps = withAuth(async () => {
+  const result = await prisma.user.findMany({
+    where: {
+      isActive: true,
+    },
+  });
 
-    const users = JSON.parse(JSON.stringify(result));
+  const users = JSON.parse(JSON.stringify(result));
 
-    return {
-      props: { users },
-    };
-  } catch (error) {
-    console.log(error);
-  }
-};
+  return {
+    props: { users },
+  };
+});
 
 export default User;

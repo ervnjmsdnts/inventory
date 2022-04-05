@@ -2,6 +2,7 @@ import { prisma } from "../../lib/prisma";
 import IngredientHeader from "../components/ingredient/IngredientHeader";
 import IngredientTable from "../components/ingredient/IngredientTable";
 import { IngredientProps } from "../types";
+import { withAuth } from "../util/withAuth";
 
 const Ingredient = (props: IngredientProps) => {
   return (
@@ -15,36 +16,32 @@ const Ingredient = (props: IngredientProps) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  try {
-    const ingredientResults = await prisma.ingredient.findMany({
-      where: {
-        isActive: true,
-      },
-      include: {
-        Category: {
-          select: {
-            name: true,
-          },
+export const getServerSideProps = withAuth(async () => {
+  const ingredientResults = await prisma.ingredient.findMany({
+    where: {
+      isActive: true,
+    },
+    include: {
+      Category: {
+        select: {
+          name: true,
         },
       },
-    });
+    },
+  });
 
-    const categoryResults = await prisma.category.findMany({
-      where: {
-        status: "ONGOING",
-      },
-    });
+  const categoryResults = await prisma.category.findMany({
+    where: {
+      status: "ONGOING",
+    },
+  });
 
-    const ingredients = JSON.parse(JSON.stringify(ingredientResults));
-    const categories = JSON.parse(JSON.stringify(categoryResults));
+  const ingredients = JSON.parse(JSON.stringify(ingredientResults));
+  const categories = JSON.parse(JSON.stringify(categoryResults));
 
-    return {
-      props: { ingredients, categories },
-    };
-  } catch (error) {
-    console.log(error);
-  }
-};
+  return {
+    props: { ingredients, categories },
+  };
+});
 
 export default Ingredient;

@@ -5,7 +5,6 @@ import { Router, useRouter } from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { UserContext, useUser } from "../context/authContext";
-import { useEffect } from "react";
 
 NProgress.configure({ showSpinner: false });
 
@@ -17,15 +16,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
   const auth = useUser();
-
-  useEffect(() => {
-    if (!auth.isAuth) {
-      router.push("/login");
-    } else {
-      router.push("/");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth.isAuth]);
 
   if (router.pathname === "/login") {
     return (

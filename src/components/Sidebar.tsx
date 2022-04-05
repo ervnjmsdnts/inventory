@@ -8,6 +8,7 @@ import { FiChevronDown, FiLogOut, FiUser } from "react-icons/fi";
 import { FaCubes } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { useUser } from "../context/authContext";
+import axios, { AxiosRequestConfig } from "axios";
 
 const Sidebar: React.FC = ({ children }) => {
   return (
@@ -43,7 +44,7 @@ const SidebarTitle: React.FC = () => {
       </div>
       <div className="p-2"></div>
       <div className="flex justify-center font-semibold text-yellow-dark text-lg bg-white p-4">
-        {`${auth.user.name} | ${auth.user.role}`}
+        {`${auth.user?.name} | ${auth.user?.role}`}
       </div>
     </>
   );
@@ -53,8 +54,16 @@ const SidebarMenu: React.FC = () => {
   const auth = useUser();
   const router = useRouter();
 
-  const logout = () => {
+  const logout = async () => {
     auth.logout();
+    const config: AxiosRequestConfig = {
+      url: "/api/auth/logout",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await axios(config);
     router.replace("/login");
   };
 
@@ -141,7 +150,7 @@ const SidebarMenu: React.FC = () => {
           </a>
         </Link>
         <div className="py-2"></div>
-        {auth.user.role === "ADMIN" && (
+        {auth.user?.role === "ADMIN" && (
           <Link href="/user">
             <a
               className={`flex items-center font-semibold text-lg p-2 hover:bg-white ${

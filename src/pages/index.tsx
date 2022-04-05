@@ -3,6 +3,7 @@ import Earning from "../components/dashboard/Earning";
 import SalesChart from "../components/dashboard/SalesChart";
 import TopTable from "../components/dashboard/TopTable";
 import { OrderProps } from "../types";
+import { withAuth } from "../util/withAuth";
 
 const Dashboard = (props: OrderProps) => {
   return (
@@ -14,31 +15,27 @@ const Dashboard = (props: OrderProps) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  try {
-    const result = await prisma.order.findMany({
-      where: {
-        isActive: true,
-      },
-      include: {
-        product: {
-          select: {
-            price: true,
-            name: true,
-            status: true,
-          },
+export const getServerSideProps = withAuth(async () => {
+  const result = await prisma.order.findMany({
+    where: {
+      isActive: true,
+    },
+    include: {
+      product: {
+        select: {
+          price: true,
+          name: true,
+          status: true,
         },
       },
-    });
+    },
+  });
 
-    const orders = JSON.parse(JSON.stringify(result));
+  const orders = JSON.parse(JSON.stringify(result));
 
-    return {
-      props: { orders },
-    };
-  } catch (error) {
-    console.log(error);
-  }
-};
+  return {
+    props: { orders },
+  };
+});
 
 export default Dashboard;

@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { compare } from "bcrypt";
 import { prisma } from "../../../../lib/prisma";
 import { sign } from "jsonwebtoken";
+import cookie from "cookie";
 
 type UserInput = {
   username: string;
@@ -33,6 +34,14 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
           role: savedUser?.role,
         };
         const token = sign(payload, "secret");
+
+        res.setHeader(
+          "Set-Cookie",
+          cookie.serialize("token", token, {
+            httpOnly: true,
+            path: "/",
+          })
+        );
 
         return res.status(200).json({ authToken: token });
       }

@@ -14,10 +14,10 @@ interface User {
   iat: number;
 }
 
-export const UserContext = createContext<AuthContext | null>({} as AuthContext);
+export const UserContext = createContext<AuthContext>({} as AuthContext);
 
 export const useUser = () => {
-  const [user, setUser] = useState<User>({} as User);
+  const [user, setUser] = useState<User | null>(null);
   const [isAuth, setIsAuth] = useState(false);
 
   let token = "";
@@ -44,7 +44,7 @@ export const useUser = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    setUser({} as User);
+    setUser(null);
     setIsAuth(false);
   };
 

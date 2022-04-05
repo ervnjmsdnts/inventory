@@ -2,6 +2,7 @@ import { prisma } from "../../lib/prisma";
 import { ProductProps } from "../types";
 import ProductHeader from "../components/product/ProductHeader";
 import ProductTable from "../components/product/ProductTable";
+import { withAuth } from "../util/withAuth";
 
 const Product = (props: ProductProps) => {
   return (
@@ -12,22 +13,18 @@ const Product = (props: ProductProps) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  try {
-    const productResults = await prisma.product.findMany({
-      where: {
-        isActive: true,
-      },
-    });
+export const getServerSideProps = withAuth(async () => {
+  const productResults = await prisma.product.findMany({
+    where: {
+      isActive: true,
+    },
+  });
 
-    const products = JSON.parse(JSON.stringify(productResults));
+  const products = JSON.parse(JSON.stringify(productResults));
 
-    return {
-      props: { products },
-    };
-  } catch (error) {
-    console.log(error);
-  }
-};
+  return {
+    props: { products },
+  };
+});
 
 export default Product;

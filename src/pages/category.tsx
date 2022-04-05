@@ -2,6 +2,7 @@ import { prisma } from "../../lib/prisma";
 import CategoryHeader from "../components/category/CategoryHeader";
 import CategoryTable from "../components/category/CategoryTable";
 import { CategoryProps } from "../types";
+import { withAuth } from "../util/withAuth";
 
 const Category = (props: CategoryProps) => {
   return (
@@ -12,22 +13,18 @@ const Category = (props: CategoryProps) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  try {
-    const result = await prisma.category.findMany({
-      where: {
-        isActive: true,
-      },
-    });
+export const getServerSideProps = withAuth(async () => {
+  const result = await prisma.category.findMany({
+    where: {
+      isActive: true,
+    },
+  });
 
-    const categories = JSON.parse(JSON.stringify(result));
+  const categories = JSON.parse(JSON.stringify(result));
 
-    return {
-      props: { categories },
-    };
-  } catch (error) {
-    console.log(error);
-  }
-};
+  return {
+    props: { categories },
+  };
+});
 
 export default Category;
