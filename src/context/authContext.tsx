@@ -16,7 +16,7 @@ interface User {
 
 export const UserContext = createContext<AuthContext>({} as AuthContext);
 
-export const useUser = () => {
+export const useUser = (): AuthContext => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuth, setIsAuth] = useState(false);
 
@@ -49,6 +49,11 @@ export const useUser = () => {
   };
 
   return { user, login, logout, isAuth };
+};
+
+export const UserProvider: React.FC = ({ children }) => {
+  const auth = useUser();
+  return <UserContext.Provider value={auth}>{children}</UserContext.Provider>;
 };
 
 export const UserConsumer = () => useContext(UserContext);

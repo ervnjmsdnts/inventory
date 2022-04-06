@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { UserConsumer } from "../context/authContext";
 import { useEffect, useState } from "react";
-import NProgress from "nprogress";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -29,18 +28,14 @@ const Login = () => {
       },
     };
 
-    NProgress.start();
-
     const result = await axios(config);
 
     if (result.status === 200) {
       if (result.data.hasOwnProperty("message")) {
         setError(result.data.message);
-        NProgress.done();
         return;
       }
       auth?.login(result.data.authToken);
-      NProgress.done();
       router.push("/");
     }
   };

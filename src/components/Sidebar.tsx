@@ -7,7 +7,7 @@ import { IoMdPaper } from "react-icons/io";
 import { FiChevronDown, FiLogOut, FiUser } from "react-icons/fi";
 import { FaCubes } from "react-icons/fa";
 import { useRouter } from "next/router";
-import { useUser } from "../context/authContext";
+import { UserConsumer } from "../context/authContext";
 import axios, { AxiosRequestConfig } from "axios";
 
 const Sidebar: React.FC = ({ children }) => {
@@ -24,7 +24,7 @@ const Sidebar: React.FC = ({ children }) => {
 };
 
 const SidebarTitle: React.FC = () => {
-  const auth = useUser();
+  const auth = UserConsumer();
   return (
     <>
       <div className="flex justify-evenly items-center pt-4">
@@ -51,7 +51,7 @@ const SidebarTitle: React.FC = () => {
 };
 
 const SidebarMenu: React.FC = () => {
-  const auth = useUser();
+  const auth = UserConsumer();
   const router = useRouter();
 
   const logout = async () => {
