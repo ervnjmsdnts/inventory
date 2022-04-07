@@ -30,8 +30,7 @@ export const useUser = (): AuthContext => {
     if (token) {
       verify(token, "secret", (err, decoded) => {
         if (!err && decoded) {
-          const { name, role, iat } = decoded as User;
-          setUser({ name, role, iat });
+          setUser(decoded as User);
           setIsAuth(true);
         }
       });
