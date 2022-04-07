@@ -1,10 +1,12 @@
+import Link from "next/link";
 import { OrderProps } from "../../types";
 import TableLayout from "../TableLayout";
 
 const TopTable = (props: OrderProps) => {
   return (
-    <div className="flex justify-around">
+    <div className="flex flex-col">
       <TopProducts orders={props.orders} />
+      <div className="p-4"></div>
       <TopOrders orders={props.orders} />
     </div>
   );
@@ -26,7 +28,7 @@ const TopProducts = (props: OrderProps) => {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-2">Top Products</h2>
+      <h2 className="text-lg font-semibold mb-2">Top 5 Products</h2>
       <TableLayout>
         <thead className="bg-yellow-dark">
           <tr>
@@ -72,8 +74,8 @@ const TopOrders = (props: OrderProps) => {
 
   const topOrders = orders?.slice(0, 5);
   return (
-    <div>
-      <h2 className="text-lg font-semibold mb-2">New Orders</h2>
+    <div className="mb-4">
+      <h2 className="text-lg font-semibold mb-2">Top 5 Orders</h2>
       <TableLayout>
         <thead className="bg-yellow-dark">
           <tr>

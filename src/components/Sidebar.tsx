@@ -12,8 +12,8 @@ import axios, { AxiosRequestConfig } from "axios";
 
 const Sidebar: React.FC = ({ children }) => {
   return (
-    <div className="flex">
-      <nav className="bg-yellow-light max-w-xs h-screen flex-grow relative">
+    <div className="flex h-full">
+      <nav className="max-w-xs self-start h-screen sticky top-0 bg-yellow-light flex-grow">
         <SidebarTitle />
         <div className="pt-4"></div>
         <SidebarMenu />
