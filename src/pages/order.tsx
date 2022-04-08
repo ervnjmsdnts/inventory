@@ -6,7 +6,7 @@ import { withAuth } from "../util/withAuth";
 
 const Order = (props: OrderProps) => {
   return (
-    <div className="flex flex-col mx-auto">
+    <div className="w-full md:w-auto mx-auto">
       <OrderHeader products={props.products} />
       <OrderTable orders={props.orders} products={props.products} />
     </div>
