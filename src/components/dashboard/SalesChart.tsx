@@ -33,26 +33,28 @@ const SalesChart = (props: OrderProps) => {
   return (
     <div className="mb-4">
       <h1 className="font-semibold text-xl md:text-2xl mb-4">Sales Chart</h1>
-      <ResponsiveContainer width="100%" height={350}>
-        <AreaChart data={data}>
-          <defs>
-            <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#E4B601" stopOpacity={0.4} />
-              <stop offset="75%" stopColor="#E4B601" stopOpacity={0.05} />
-            </linearGradient>
-          </defs>
+      <div className="w-2/4">
+        <ResponsiveContainer width="100%" height={350}>
+          <AreaChart data={data}>
+            <defs>
+              <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#E4B601" stopOpacity={0.4} />
+                <stop offset="75%" stopColor="#E4B601" stopOpacity={0.05} />
+              </linearGradient>
+            </defs>
 
-          <Area dataKey="total" stroke="#6C4534" fill="url(#color)" />
-          <XAxis dataKey="date" axisLine={false} />
-          <YAxis
-            dataKey="total"
-            axisLine={false}
-            tickFormatter={(price) => `\u20B1${price}`}
-          />
-          <Tooltip content={<CustomToolTip />} />
-          <CartesianGrid opacity={0.5} />
-        </AreaChart>
-      </ResponsiveContainer>
+            <Area dataKey="total" stroke="#6C4534" fill="url(#color)" />
+            <XAxis dataKey="date" axisLine={false} />
+            <YAxis
+              dataKey="total"
+              axisLine={false}
+              tickFormatter={(price) => `\u20B1${price}`}
+            />
+            <Tooltip content={<CustomToolTip />} />
+            <CartesianGrid opacity={0.5} />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
