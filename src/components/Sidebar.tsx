@@ -1,10 +1,10 @@
-import { Disclosure } from "@headlessui/react";
+import { Disclosure, Menu } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { BiStats, BiCategoryAlt } from "react-icons/bi";
 import { HiOutlineCube, HiOutlineShoppingCart } from "react-icons/hi";
 import { IoMdPaper } from "react-icons/io";
-import { FiChevronDown, FiLogOut, FiUser } from "react-icons/fi";
+import { FiChevronDown, FiLogOut, FiMenu, FiUser } from "react-icons/fi";
 import { FaCubes } from "react-icons/fa";
 import { useRouter } from "next/router";
 import { UserConsumer } from "../context/authContext";
@@ -12,14 +12,130 @@ import axios, { AxiosRequestConfig } from "axios";
 
 const Sidebar: React.FC = ({ children }) => {
   return (
-    <div className="flex h-full">
-      <nav className="max-w-xs self-start h-screen sticky top-0 bg-yellow-light flex-grow">
-        <SidebarTitle />
-        <div className="pt-4"></div>
-        <SidebarMenu />
-      </nav>
-      {children}
-    </div>
+    <>
+      <MobileNav />
+      <div className="flex h-full">
+        <nav className="hidden md:block max-w-xs self-start h-screen sticky top-0 bg-yellow-light flex-grow">
+          <SidebarTitle />
+          <div className="pt-4"></div>
+          <SidebarMenu />
+        </nav>
+        {children}
+      </div>
+    </>
+  );
+};
+
+const MobileNav: React.FC = () => {
+  const auth = UserConsumer();
+  return (
+    <nav className="md:hidden flex">
+      <div className="bg-yellow-light w-full flex items-center justify-between">
+        <div className="w-full">
+          <Menu>
+            <div className="flex justify-between p-2">
+              <div className="relative h-12 w-12">
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  layout="fill"
+                  className="rounded-full"
+                  priority={true}
+                />
+              </div>
+              <Menu.Button>
+                <div className="flex">
+                  <FiMenu size={24} />
+                </div>
+              </Menu.Button>
+            </div>
+            <Menu.Items>
+              <Menu.Item>
+                <Link href="/">
+                  <a className="flex items-center text-lg p-2 font-semibold">
+                    <div className="m-2">
+                      <BiStats />
+                    </div>
+                    Dashboard
+                  </a>
+                </Link>
+              </Menu.Item>
+              <Menu.Item>
+                <Disclosure>
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button
+                        className={`flex justify-between items-center w-full p-2 hover:bg-white ${
+                          open ? "bg-white" : ""
+                        }`}>
+                        <div className="flex items-center font-semibold text-lg">
+                          <div className="m-2">
+                            <FaCubes />
+                          </div>
+                          Inventory
+                        </div>
+                        <div
+                          className={`${open ? "transform rotate-180" : ""}`}>
+                          <FiChevronDown />
+                        </div>
+                      </Disclosure.Button>
+                      <Disclosure.Panel className="flex flex-col bg-white pl-2">
+                        <Link href="/category">
+                          <a className="flex items-center text-lg p-2 font-semibold">
+                            <div className="m-2">
+                              <BiCategoryAlt />
+                            </div>
+                            Category
+                          </a>
+                        </Link>
+                        <Link href="/ingredient">
+                          <a className="flex items-center text-lg p-2 font-semibold">
+                            <div className="m-2">
+                              <IoMdPaper />
+                            </div>
+                            Ingredient
+                          </a>
+                        </Link>
+                        <Link href="/product">
+                          <a className="flex items-center text-lg p-2 font-semibold">
+                            <div className="m-2">
+                              <HiOutlineCube />
+                            </div>
+                            Product
+                          </a>
+                        </Link>
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+              </Menu.Item>
+              <Menu.Item>
+                <Link href="/order">
+                  <a className="flex items-center text-lg p-2 font-semibold">
+                    <div className="m-2">
+                      <HiOutlineShoppingCart />
+                    </div>
+                    Order
+                  </a>
+                </Link>
+              </Menu.Item>
+              {auth.user.role === "ADMIN" && (
+                <Menu.Item>
+                  <Link href="/order">
+                    <a className="flex items-center text-lg p-2 font-semibold">
+                      <div className="m-2">
+                        <FiUser />
+                      </div>
+                      User
+                    </a>
+                  </Link>
+                </Menu.Item>
+              )}
+            </Menu.Items>
+          </Menu>
+        </div>
+      </div>
+    </nav>
   );
 };
 
