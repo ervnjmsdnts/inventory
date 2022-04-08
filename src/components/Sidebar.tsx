@@ -29,7 +29,7 @@ const Sidebar: React.FC = ({ children }) => {
 const MobileNav: React.FC = () => {
   const auth = UserConsumer();
   return (
-    <nav className="md:hidden flex">
+    <nav className="md:hidden w-screen">
       <div className="bg-yellow-light w-full flex items-center justify-between">
         <div className="w-full">
           <Menu>

@@ -80,22 +80,22 @@ const TopOrders = (props: OrderProps) => {
           <tr>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+              className="md:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
               Customer Name
             </th>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+              className="md:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
               Product
             </th>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+              className="md:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
               No. of Items
             </th>
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+              className="md:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
               Price
             </th>
           </tr>
@@ -103,26 +103,26 @@ const TopOrders = (props: OrderProps) => {
         <tbody className="bg-white w-full divide-y divide-gray-200">
           {topOrders?.map((order: any) => (
             <tr key={order.id}>
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="md:px-6 py-4 whitespace-no-wrap">
                 <div className="flex items-center">
                   <div className="text-sm leading-5 font-medium text-gray-900">
                     {order.customerName}
                   </div>
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="md:px-6 py-4 whitespace-no-wrap">
                 <div className="flex items-center">
                   <div className="text-sm leading-5 font-medium text-gray-900">
                     {order.product.name}
                   </div>
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="md:px-6 py-4 whitespace-no-wrap">
                 <div className="text-sm leading-5 text-gray-900">
                   {order.numberOfItems}
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-no-wrap">
+              <td className="md:px-6 py-4 whitespace-no-wrap">
                 <div className="text-sm leading-5 text-gray-900">
                   &#x20B1;{order.product.price * order.numberOfItems}
                 </div>
