@@ -27,9 +27,7 @@ const TopProducts = (props: OrderProps) => {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold pl-4 md:pl-0 mb-2">
-        Top 5 Products
-      </h2>
+      <h2 className="text-lg font-semibold mb-2">Top 5 Products</h2>
       <TableLayout>
         <thead className="bg-yellow-dark">
           <tr>
@@ -76,7 +74,7 @@ const TopOrders = (props: OrderProps) => {
   const topOrders = orders?.slice(0, 5);
   return (
     <div className="mb-4">
-      <h2 className="text-lg font-semibold pl-4 md:pl-0 mb-2">Top 5 Orders</h2>
+      <h2 className="text-lg font-semibold mb-2">Top 5 Orders</h2>
       <TableLayout>
         <thead className="bg-yellow-dark">
           <tr>
