@@ -32,7 +32,7 @@ const SalesChart = (props: OrderProps) => {
 
   return (
     <>
-      <h1 className="font-semibold text-xl md:text-2xl pl-4 md:pl-0 mb-4">
+      <h1 className="font-semibold text-xl md:text-2xl pl-4 md:pl-0 mt-4 md:mt-0 mb-4 text-center md:text-left">
         Sales Chart
       </h1>
       <div className="w-full">
