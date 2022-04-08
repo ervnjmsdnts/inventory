@@ -6,7 +6,7 @@ import { withAuth } from "../util/withAuth";
 
 const Category = (props: CategoryProps) => {
   return (
-    <div className="flex flex-col mx-auto">
+    <div className="mx-auto w-1/2 md:w-auto">
       <CategoryHeader />
       <CategoryTable categories={props.categories} />
     </div>

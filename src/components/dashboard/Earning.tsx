@@ -2,7 +2,7 @@ import { OrderProps } from "../../types";
 
 const Earning = (props: OrderProps) => {
   return (
-    <div className="bg-gradient-to-r from-yellow-light to-[#fffced] w-2/4 p-4 rounded-md md:mb-4 drop-shadow-md">
+    <div className="bg-gradient-to-r from-yellow-light to-[#fffced] w-2/4 max-w-md p-4 rounded-md md:mb-4 drop-shadow-md">
       <h1 className="text-2xl font-semibold">
         &#x20B1;
         {props.orders?.reduce(

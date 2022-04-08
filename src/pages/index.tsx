@@ -7,10 +7,12 @@ import { withAuth } from "../util/withAuth";
 
 const Dashboard = (props: OrderProps) => {
   return (
-    <div className="flex flex-col md:mx-auto md:w-3/4 md:p-4">
-      <Earning orders={props.orders} />
-      <SalesChart orders={props.orders} />
-      <TopTable orders={props.orders} />
+    <div className="w-screen">
+      <div className="flex flex-col md:mx-auto md:w-3/4 md:p-4">
+        <Earning orders={props.orders} />
+        <SalesChart orders={props.orders} />
+        <TopTable orders={props.orders} />
+      </div>
     </div>
   );
 };

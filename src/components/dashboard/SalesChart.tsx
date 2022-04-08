@@ -31,9 +31,11 @@ const SalesChart = (props: OrderProps) => {
   });
 
   return (
-    <div className="mb-4">
-      <h1 className="font-semibold text-xl md:text-2xl mb-4">Sales Chart</h1>
-      <div className="w-2/4">
+    <>
+      <h1 className="font-semibold text-xl md:text-2xl pl-4 md:pl-0 mb-4">
+        Sales Chart
+      </h1>
+      <div className="w-full">
         <ResponsiveContainer width="100%" height={350}>
           <AreaChart data={data}>
             <defs>
@@ -55,7 +57,7 @@ const SalesChart = (props: OrderProps) => {
           </AreaChart>
         </ResponsiveContainer>
       </div>
-    </div>
+    </>
   );
 };
 
