@@ -6,7 +6,7 @@ import { withAuth } from "../util/withAuth";
 
 const Ingredient = (props: IngredientProps) => {
   return (
-    <div className="w-full mx-auto md:w-full">
+    <div className="w-full mx-auto md:w-auto">
       <IngredientHeader categories={props.categories} />
       <IngredientTable
         ingredients={props.ingredients}
