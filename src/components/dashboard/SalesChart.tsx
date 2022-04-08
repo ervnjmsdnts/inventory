@@ -32,7 +32,9 @@ const SalesChart = (props: OrderProps) => {
 
   return (
     <div className="mb-4">
-      <h1 className="font-bold text-2xl mb-4">Sales Chart</h1>
+      <h1 className="font-semibold text-xl md:text-2xl pl-4 md:pl-0 mb-4">
+        Sales Chart
+      </h1>
       <ResponsiveContainer width="100%" height={350}>
         <AreaChart data={data}>
           <defs>

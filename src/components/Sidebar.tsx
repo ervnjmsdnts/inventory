@@ -119,7 +119,7 @@ const MobileNav: React.FC = () => {
                   </a>
                 </Link>
               </Menu.Item>
-              {auth.user.role === "ADMIN" && (
+              {auth.user?.role === "ADMIN" && (
                 <Menu.Item>
                   <Link href="/order">
                     <a className="flex items-center text-lg p-2 font-semibold">
