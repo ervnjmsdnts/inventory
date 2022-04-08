@@ -6,7 +6,7 @@ import { withAuth } from "../util/withAuth";
 
 const User = (props: UserProps) => {
   return (
-    <div className="flex flex-col mx-auto">
+    <div className="mx-auto w-full md:w-auto">
       <UserHeader />
       <UserTable users={props.users} />
     </div>
