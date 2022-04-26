@@ -3,7 +3,7 @@
 
 datasource db {
   provider             = "mysql"
-  url                  = "mysql://root:password@localhost:3306/inventory"
+  url                  = "mysql://root:password@localhost:3306/inventory_local"
   // shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
   referentialIntegrity = "prisma"
 }

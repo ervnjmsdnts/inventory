@@ -46,7 +46,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
         return res.status(200).json({ authToken: token });
       }
 
-      return res.json({ message: "Invalid credentials" });
+      return res.json({ message: "Invalid" });
     });
   } catch (error) {
     return res.status(500).json(error);
