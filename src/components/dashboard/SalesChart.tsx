@@ -66,7 +66,7 @@ const CustomToolTip = ({ active, payload, label }: any) => {
     return (
       <div className="bg-white border border-brown-dark text-brown-dark p-2 rounded-md">
         <h4>{label}</h4>
-        <p className="text-sm">&#x20B1;{payload[0].value}</p>
+        <p className="text-sm">&#x20B1;{payload ? payload[0].value : ""}</p>
       </div>
     );
   }
