@@ -28,6 +28,20 @@ const Sidebar: React.FC = ({ children }) => {
 
 const MobileNav: React.FC = () => {
   const auth = UserConsumer();
+  const router = useRouter();
+
+  const logout = async () => {
+    auth.logout();
+    const config: AxiosRequestConfig = {
+      url: "/api/auth/logout",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    await axios(config);
+    router.replace("/login");
+  };
   return (
     <nav className="md:hidden w-screen">
       <div className="bg-yellow-light w-full flex items-center justify-between">
@@ -131,6 +145,17 @@ const MobileNav: React.FC = () => {
                   </Link>
                 </Menu.Item>
               )}
+              <Menu.Item>
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="flex items-center text-lg p-2 font-semibold">
+                  <div className="m-2">
+                    <FiLogOut />
+                  </div>
+                  Logout
+                </button>
+              </Menu.Item>
             </Menu.Items>
           </Menu>
         </div>
