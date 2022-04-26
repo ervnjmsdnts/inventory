@@ -20,7 +20,7 @@
         \`npm install\`
 
     * Migrate prisma schema:
-        \`prisma migrate dev\`
+        `prisma migrate dev`
 
     * Run the application:
         \`npm run dev\`
