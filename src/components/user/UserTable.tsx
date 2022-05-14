@@ -13,7 +13,7 @@ const UserTable = (props: UserProps) => {
   const [user, setUser] = useState<any>();
   const router = useRouter();
 
-  const deleteCategory = async (id: string) => {
+  const deleteCategory = async (id: number) => {
     const config: AxiosRequestConfig = {
       url: "/api/auth/delete",
       data: { id },
