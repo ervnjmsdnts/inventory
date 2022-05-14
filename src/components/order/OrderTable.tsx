@@ -6,8 +6,10 @@ import { OrderProps } from "../../types";
 import TableLayout from "../TableLayout";
 import { UpdateOrderModal } from "./OrderModals";
 import NProgress from "nprogress";
+import { UserConsumer } from "../../context/authContext";
 
 const OrderTable = (props: OrderProps) => {
+  const auth = UserConsumer();
   const [isOpen, setIsOpen] = useState(false);
   const [order, setOrder] = useState<any>();
   const router = useRouter();
@@ -67,12 +69,16 @@ const OrderTable = (props: OrderProps) => {
               className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
               Created At
             </th>
-            <th scope="col" className="relative px-6 py-3">
-              <span className="sr-only">Edit</span>
-            </th>
-            <th scope="col" className="relative px-6 py-3">
-              <span className="sr-only">Delete</span>
-            </th>
+            {auth.user?.role === "ADMIN" && (
+              <>
+                <th scope="col" className="relative px-6 py-3">
+                  <span className="sr-only">Edit</span>
+                </th>
+                <th scope="col" className="relative px-6 py-3">
+                  <span className="sr-only">Delete</span>
+                </th>
+              </>
+            )}
           </tr>
         </thead>
         <tbody className="bg-white w-full divide-y divide-gray-200">
@@ -108,25 +114,29 @@ const OrderTable = (props: OrderProps) => {
                   {dayjs(order.createdAt).format("MMMM DD, YYYY")}
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button
-                  onClick={() => {
-                    setIsOpen(true);
-                    setOrder(order);
-                  }}
-                  type="button"
-                  className="text-indigo-600 hover:text-indigo-900">
-                  Edit
-                </button>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <button
-                  onClick={() => deleteOrder(order.id)}
-                  type="button"
-                  className="text-red-600 hover:text-red-900">
-                  Delete
-                </button>
-              </td>
+              {auth.user?.role === "ADMIN" && (
+                <>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button
+                      onClick={() => {
+                        setIsOpen(true);
+                        setOrder(order);
+                      }}
+                      type="button"
+                      className="text-indigo-600 hover:text-indigo-900">
+                      Edit
+                    </button>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button
+                      onClick={() => deleteOrder(order.id)}
+                      type="button"
+                      className="text-red-600 hover:text-red-900">
+                      Delete
+                    </button>
+                  </td>
+                </>
+              )}
             </tr>
           ))}
         </tbody>
