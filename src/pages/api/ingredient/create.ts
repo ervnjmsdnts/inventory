@@ -13,6 +13,7 @@ export default async function createIngredient(
     let { id, name, quantity, status, categoryId } = req.body;
 
     quantity = Number(quantity);
+    categoryId = Number(categoryId);
 
     const savedIngredient = await prisma.ingredient.create({
       data: { id, name, quantity, status, categoryId },
@@ -20,6 +21,6 @@ export default async function createIngredient(
 
     return res.status(200).json({ savedIngredient });
   } catch (error) {
-    return res.status(500).json({ error: error });
+    return res.status(500).json({ error: "Something went wrong oh noooo" });
   }
 }

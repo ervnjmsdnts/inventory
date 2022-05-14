@@ -61,6 +61,11 @@ const ProductTable = (props: ProductProps) => {
             <th
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+              Ingredient
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
               Created At
             </th>
             <th scope="col" className="relative px-6 py-3">
@@ -72,7 +77,7 @@ const ProductTable = (props: ProductProps) => {
           </tr>
         </thead>
         <tbody className="bg-white w-full divide-y divide-gray-200">
-          {props.products.map((product) => (
+          {props.products?.map((product) => (
             <tr key={product.id}>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm font-medium text-gray-900">
@@ -93,6 +98,11 @@ const ProductTable = (props: ProductProps) => {
                 ) : (
                   <ErrorStatus>{product.status}</ErrorStatus>
                 )}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="text-sm text-gray-900">
+                  {product.ingredient.name}
+                </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm text-gray-900">
@@ -126,6 +136,7 @@ const ProductTable = (props: ProductProps) => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         product={product}
+        ingredients={props.ingredients}
       />
     </>
   );

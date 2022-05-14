@@ -13,6 +13,7 @@ export default async function updateIngredient(
     let { id, name, quantity, status, categoryId } = req.body;
 
     quantity = Number(quantity);
+    categoryId = Number(categoryId);
 
     const savedIngredient = await prisma.ingredient.update({
       where: {

@@ -10,15 +10,16 @@ export default async function updateProduct(
   }
 
   try {
-    let { id, name, price, status } = req.body;
+    let { id, name, price, status, ingredientId } = req.body;
 
     price = Number(price);
+    ingredientId = Number(ingredientId);
 
     const savedProduct = await prisma.product.update({
       where: {
         id: id,
       },
-      data: { name, price, status },
+      data: { name, price, status, ingredientId },
     });
 
     return res.status(200).json({ savedProduct });

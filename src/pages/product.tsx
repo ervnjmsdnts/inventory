@@ -7,8 +7,8 @@ import { withAuth } from "../util/withAuth";
 const Product = (props: ProductProps) => {
   return (
     <div className="w-full md:w-auto mx-auto">
-      <ProductHeader />
-      <ProductTable products={props.products} />
+      <ProductHeader ingredients={props.ingredients} />
+      <ProductTable products={props.products} ingredients={props.ingredients} />
     </div>
   );
 };
@@ -18,12 +18,26 @@ export const getServerSideProps = withAuth(async () => {
     where: {
       isActive: true,
     },
+    include: {
+      ingredient: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+
+  const ingredientResults = await prisma.ingredient.findMany({
+    where: {
+      isActive: true,
+    },
   });
 
   const products = JSON.parse(JSON.stringify(productResults));
+  const ingredients = JSON.parse(JSON.stringify(ingredientResults));
 
   return {
-    props: { products },
+    props: { products, ingredients },
   };
 });
 

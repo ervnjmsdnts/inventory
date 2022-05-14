@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { BiPlus } from "react-icons/bi";
+import { ProductProps } from "../../types";
 import { CreateProductModal } from "./ProductModals";
 
-const ProductHeader = () => {
+const ProductHeader = (props: ProductProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -19,7 +20,11 @@ const ProductHeader = () => {
         </div>
         Add Product
       </button>
-      <CreateProductModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <CreateProductModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        ingredients={props.ingredients}
+      />
     </div>
   );
 };

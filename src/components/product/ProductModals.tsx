@@ -9,6 +9,7 @@ import NProgress from "nprogress";
 export const CreateProductModal: React.FC<ProductModal> = ({
   isOpen,
   setIsOpen,
+  ingredients,
 }) => {
   const { register, handleSubmit } = useForm<ProductInput>();
   const router = useRouter();
@@ -57,12 +58,23 @@ export const CreateProductModal: React.FC<ProductModal> = ({
                 placeholder="Enter product price"
                 {...register("price", { required: true })}
               />
-              <div className="px-2"></div>
+            </div>
+            <div className="flex">
               <select
                 {...register("status", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 <option value="AVAILABLE">AVAILABLE</option>
                 <option value="NOTAVAILABLE">NOTAVAILABLE</option>
+              </select>
+              <div className="px-2"></div>
+              <select
+                {...register("ingredientId", { required: true })}
+                className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
+                {ingredients?.map((ingredient) => (
+                  <option key={ingredient.id} value={ingredient.id}>
+                    {ingredient.name}
+                  </option>
+                ))}
               </select>
             </div>
             <button
@@ -81,6 +93,7 @@ export const UpdateProductModal: React.FC<ProductModal> = ({
   isOpen,
   setIsOpen,
   product,
+  ingredients,
 }) => {
   const { register, handleSubmit, setValue } = useForm<ProductInput>();
   const router = useRouter();
@@ -90,6 +103,7 @@ export const UpdateProductModal: React.FC<ProductModal> = ({
       setValue("name", product.name);
       setValue("price", product.price);
       setValue("status", product.status);
+      setValue("ingredientId", product.ingredientId);
     }
   }, [product, setValue]);
 
@@ -139,12 +153,23 @@ export const UpdateProductModal: React.FC<ProductModal> = ({
                 placeholder="Enter product price"
                 {...register("price", { required: true })}
               />
-              <div className="px-2"></div>
+            </div>
+            <div className="flex">
               <select
                 {...register("status", { required: true })}
                 className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
                 <option value="AVAILABLE">AVAILABLE</option>
                 <option value="NOTAVAILABLE">NOTAVAILABLE</option>
+              </select>
+              <div className="px-2"></div>
+              <select
+                {...register("ingredientId", { required: true })}
+                className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
+                {ingredients?.map((ingredient) => (
+                  <option key={ingredient.id} value={ingredient.id}>
+                    {ingredient.name}
+                  </option>
+                ))}
               </select>
             </div>
             <button

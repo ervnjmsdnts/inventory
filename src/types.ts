@@ -14,7 +14,7 @@ export type Ingredient = {
   name: string;
   quantity: number;
   status: Status;
-  categoryId: string;
+  categoryId: number;
   createdAt: Date;
   updatedAt: Date;
   isActive: boolean;
@@ -25,6 +25,7 @@ export type Product = {
   name: string;
   price: number;
   status: Status;
+  ingredientId: number;
   createdAt: Date;
   updatedAt: Date;
   isActive: boolean;
@@ -33,7 +34,7 @@ export type Product = {
 export type Order = {
   id: string;
   customerName: string;
-  productId: string;
+  productId: number;
   numberOfItems: number;
   createdAt: Date;
   updatedAt: Date;
@@ -91,7 +92,7 @@ export interface IngredientInput {
   name: string;
   quantity: number;
   status: Status;
-  categoryId: string;
+  categoryId: number;
 }
 
 export interface IngredientModal {
@@ -101,20 +102,27 @@ export interface IngredientModal {
   categories?: Category[];
 }
 
+export interface ProductIngredient extends Product {
+  ingredient: Ingredient;
+}
+
 export interface ProductProps {
-  products: Product[];
+  products?: ProductIngredient[];
+  ingredients?: Ingredient[];
 }
 
 export interface ProductInput {
   name: string;
   price: number;
   status: Status;
+  ingredientId: number;
 }
 
 export interface ProductModal {
   product?: Product | undefined;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  ingredients?: Ingredient[];
 }
 
 export interface OrderProps {
