@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import Head from "next/head";
 import type { AppProps } from "next/app";
 import Sidebar from "../components/Sidebar";
 import { Router, useRouter } from "next/router";
@@ -18,6 +19,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   if (router.pathname === "/login") {
     return (
       <UserProvider>
+        <Head>
+          <title>Cha-Bear | Login</title>
+          <link rel="shortcut icon" href="/logo.png" />
+        </Head>
         <Component {...pageProps} />;
       </UserProvider>
     );
@@ -25,6 +30,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
       <UserProvider>
         <Sidebar>
+          <Head>
+            <title>Cha-Bear | Inventory</title>
+            <link rel="shortcut icon" href="/logo.png" />
+          </Head>
           <Component {...pageProps} />
         </Sidebar>
       </UserProvider>
