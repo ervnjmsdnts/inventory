@@ -132,7 +132,7 @@ export interface OrderProps {
 
 export interface OrderInput {
   customerName: string;
-  productId: string;
+  productId: number;
   numberOfItems: number;
 }
 
