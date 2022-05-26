@@ -25,7 +25,7 @@ export type Product = {
   name: string;
   price: number;
   status: Status;
-  ingredientId: number;
+  ingredients: number[];
   createdAt: Date;
   updatedAt: Date;
   isActive: boolean;
@@ -115,7 +115,7 @@ export interface ProductInput {
   name: string;
   price: number;
   status: Status;
-  ingredientId: number;
+  ingredients: number[];
 }
 
 export interface ProductModal {

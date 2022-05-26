@@ -10,13 +10,23 @@ export default async function createProduct(
   }
 
   try {
-    let { name, price, status, ingredientId } = req.body;
+    let { name, price, status, ingredients } = req.body;
 
     price = Number(price);
-    ingredientId = Number(ingredientId);
 
     const savedProduct = await prisma.product.create({
-      data: { name, price, status, ingredientId },
+      data: {
+        name,
+        price,
+        status,
+        ingredients: {
+          connect: ingredients.map((ingredient: any) => {
+            return {
+              id: Number(ingredient.ingredientId),
+            };
+          }),
+        },
+      },
     });
 
     return res.status(200).json({ savedProduct });

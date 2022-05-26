@@ -15,6 +15,12 @@ export default async function updateOrder(
     numberOfItems = Number(numberOfItems);
     productId = Number(productId);
 
+    const oldOrder = await prisma.order.findFirst({
+      where: {
+        id: Number(id),
+      },
+    });
+
     const savedOrder = await prisma.order.update({
       where: {
         id: id,
@@ -23,27 +29,26 @@ export default async function updateOrder(
     });
 
     const product = await prisma.product.findFirst({
-      where: {
-        id: productId,
-      },
+      where: { id: productId },
+      include: { ingredients: true },
     });
 
-    const ingredient = await prisma.ingredient.findFirst({
-      where: {
-        id: product?.ingredientId,
-      },
-    });
+    const ingredients = product!.ingredients;
 
-    const newQuantity = ingredient!.quantity - numberOfItems;
+    for (let i = 0; i < ingredients.length; i++) {
+      const ingredient = ingredients[i];
+      const stock = await prisma.ingredient.findFirst({
+        where: { id: ingredient.id },
+      });
 
-    await prisma.ingredient.update({
-      where: {
-        id: ingredient?.id,
-      },
-      data: {
-        quantity: newQuantity,
-      },
-    });
+      const newStock =
+        stock!.quantity - Math.abs(numberOfItems - oldOrder!.numberOfItems);
+
+      await prisma.ingredient.update({
+        where: { id: stock!.id },
+        data: { quantity: newStock },
+      });
+    }
 
     return res.status(200).json({ savedOrder });
   } catch (error) {

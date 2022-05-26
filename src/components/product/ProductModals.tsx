@@ -1,20 +1,33 @@
 import { Dialog } from "@headlessui/react";
 import axios, { AxiosRequestConfig } from "axios";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { ProductInput, ProductModal } from "../../types";
+import { useEffect, useState } from "react";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { ProductModal } from "../../types";
 import NProgress from "nprogress";
+import { BiMinus } from "react-icons/bi";
 
 export const CreateProductModal: React.FC<ProductModal> = ({
   isOpen,
   setIsOpen,
   ingredients,
 }) => {
-  const { register, handleSubmit } = useForm<ProductInput>();
+  const { register, handleSubmit, control } = useForm<any>({
+    defaultValues: {
+      name: "",
+      price: "",
+      status: "AVAILABLE",
+      ingredients: [{}],
+    },
+  });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "ingredients",
+  });
   const router = useRouter();
 
-  const onSubmitForm: SubmitHandler<ProductInput> = async (data) => {
+  const onSubmitForm: SubmitHandler<any> = async (data) => {
+    console.log("data", data);
     const config: AxiosRequestConfig = {
       url: "/api/product/create",
       data,
@@ -59,29 +72,49 @@ export const CreateProductModal: React.FC<ProductModal> = ({
                 {...register("price", { required: true })}
               />
             </div>
-            <div className="flex">
-              <select
-                {...register("status", { required: true })}
-                className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
-                <option value="AVAILABLE">AVAILABLE</option>
-                <option value="NOTAVAILABLE">NOTAVAILABLE</option>
-              </select>
-              <div className="px-2"></div>
-              <select
-                {...register("ingredientId", { required: true })}
-                className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
-                {ingredients?.map((ingredient) => (
-                  <option key={ingredient.id} value={ingredient.id}>
-                    {ingredient.name}
-                  </option>
-                ))}
-              </select>
+            <select
+              {...register("status", { required: true })}
+              className="bg-gray-100 w-full text-gray-900 rounded-md pl-2 h-12 mt-2">
+              <option value="AVAILABLE">AVAILABLE</option>
+              <option value="NOTAVAILABLE">NOTAVAILABLE</option>
+            </select>
+            <h3 className="text-lg font-bold">Ingredients:</h3>
+            {fields.map((field, index) => {
+              return (
+                <div className="flex gap-2" key={field.id}>
+                  <select
+                    {...register(`ingredients[${index}].ingredientId`, {
+                      required: true,
+                    })}
+                    className="w-full bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
+                    {ingredients?.map((ingredient) => (
+                      <option key={ingredient.id} value={ingredient.id}>
+                        {ingredient.name}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    className="text-2xl"
+                    onClick={() => remove(index)}>
+                    <BiMinus />
+                  </button>
+                </div>
+              );
+            })}
+            <div className="flex justify-between">
+              <button
+                type="submit"
+                className="bg-yellow-dark rounded-md px-4 py-2 mt-4">
+                Add Product
+              </button>
+              <button
+                type="button"
+                onClick={() => append({})}
+                className="bg-yellow-dark rounded-md px-4 py-2 mt-4">
+                Add Ingredient
+              </button>
             </div>
-            <button
-              type="submit"
-              className="bg-yellow-dark rounded-md px-4 py-2 mt-4">
-              Add Product
-            </button>
           </form>
         </div>
       </div>
@@ -95,19 +128,31 @@ export const UpdateProductModal: React.FC<ProductModal> = ({
   product,
   ingredients,
 }) => {
-  const { register, handleSubmit, setValue } = useForm<ProductInput>();
+  const { register, handleSubmit, setValue, control } = useForm<any>();
+  const { fields, append, remove, replace } = useFieldArray({
+    control,
+    name: "ingredients",
+  });
   const router = useRouter();
+
+  console.log("product", product);
 
   useEffect(() => {
     if (product) {
       setValue("name", product.name);
       setValue("price", product.price);
       setValue("status", product.status);
-      setValue("ingredientId", product.ingredientId);
+      replace(
+        product.ingredients.map((ingredient: any) => {
+          return {
+            ingredientId: ingredient.id,
+          };
+        })
+      );
     }
-  }, [product, setValue]);
+  }, [product, setValue, replace]);
 
-  const onSubmitForm: SubmitHandler<ProductInput> = async (data) => {
+  const onSubmitForm: SubmitHandler<any> = async (data) => {
     const config: AxiosRequestConfig = {
       url: "/api/product/update",
       data: { id: product?.id, ...data },
@@ -154,29 +199,49 @@ export const UpdateProductModal: React.FC<ProductModal> = ({
                 {...register("price", { required: true })}
               />
             </div>
-            <div className="flex">
-              <select
-                {...register("status", { required: true })}
-                className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
-                <option value="AVAILABLE">AVAILABLE</option>
-                <option value="NOTAVAILABLE">NOTAVAILABLE</option>
-              </select>
-              <div className="px-2"></div>
-              <select
-                {...register("ingredientId", { required: true })}
-                className="w-1/2 bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
-                {ingredients?.map((ingredient) => (
-                  <option key={ingredient.id} value={ingredient.id}>
-                    {ingredient.name}
-                  </option>
-                ))}
-              </select>
+            <select
+              {...register("status", { required: true })}
+              className="bg-gray-100 w-full text-gray-900 rounded-md pl-2 h-12 mt-2">
+              <option value="AVAILABLE">AVAILABLE</option>
+              <option value="NOTAVAILABLE">NOTAVAILABLE</option>
+            </select>
+            <h3 className="text-lg font-bold">Ingredients:</h3>
+            {fields.map((field, index) => {
+              return (
+                <div className="flex gap-2" key={field.id}>
+                  <select
+                    {...register(`ingredients[${index}].ingredientId`, {
+                      required: true,
+                    })}
+                    className="w-full bg-gray-100 text-gray-900 rounded-md pl-2 h-12 mt-2">
+                    {ingredients?.map((ingredient) => (
+                      <option key={ingredient.id} value={ingredient.id}>
+                        {ingredient.name}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    className="text-2xl"
+                    onClick={() => remove(index)}>
+                    <BiMinus />
+                  </button>
+                </div>
+              );
+            })}
+            <div className="flex justify-between">
+              <button
+                type="submit"
+                className="bg-yellow-dark rounded-md px-4 py-2 mt-4">
+                Edit Product
+              </button>
+              <button
+                type="button"
+                onClick={() => append({})}
+                className="bg-yellow-dark rounded-md px-4 py-2 mt-4">
+                Add Ingredient
+              </button>
             </div>
-            <button
-              type="submit"
-              className="bg-yellow-dark rounded-md px-4 py-2 mt-4">
-              Edit Product
-            </button>
           </form>
         </div>
       </div>

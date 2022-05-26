@@ -13,3 +13,14 @@ body {
 #nprogress .peg {
   box-shadow: 0 0 10px #e4b601, 0 0 5px #e4b601 !important;
 }
+
+[class^="number-slide"],
+[class*=" number-slide"] {
+   @apply bg-gray-300 flex items-center justify-center w-[1600px] h-[300px];
+  background: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 900px;
+  height: 500px;
+}

@@ -10,16 +10,29 @@ export default async function updateProduct(
   }
 
   try {
-    let { id, name, price, status, ingredientId } = req.body;
+    let { id, name, price, status, ingredients } = req.body;
 
     price = Number(price);
-    ingredientId = Number(ingredientId);
 
-    const savedProduct = await prisma.product.update({
+    await prisma.product.delete({
       where: {
-        id: id,
+        id: Number(id),
       },
-      data: { name, price, status, ingredientId },
+    });
+
+    const savedProduct = await prisma.product.create({
+      data: {
+        name,
+        price,
+        status,
+        ingredients: {
+          connect: ingredients.map((ingredient: any) => {
+            return {
+              id: Number(ingredient.ingredientId),
+            };
+          }),
+        },
+      },
     });
 
     return res.status(200).json({ savedProduct });

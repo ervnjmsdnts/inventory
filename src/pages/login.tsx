@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { UserConsumer } from "../context/authContext";
 import { useEffect, useState } from "react";
+import Slider from "../components/Slider";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -42,38 +43,48 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen">
-        <div className="bg-yellow-light flex items-center justify-center w-[400px] h-[300px] relative rounded-md shadow">
-          <div className="absolute -top-12 h-24 w-24">
+      <div className="flex flex-col md:flex-row items-center justify-evenly md:h-screen py-16">
+        <div className="flex justify-center flex-col items-center mb-16 md:m-0">
+          <h1 className="text-5xl text-gray-800 font-bold">Welcome Back!</h1>
+          <p className="text-xl text-gray-500">Please enter your details</p>
+          <div className="relative h-32 w-32 mt-8">
             <Image
               src="/logo.png"
               alt="Logo"
               layout="fill"
-              priority={true}
               className="rounded-full"
+              priority={true}
             />
           </div>
-          <form onSubmit={handleSubmit(onSubmitForm)} className="w-full mt-8">
-            <div className="flex">
+          <Slider />
+        </div>
+        <div className="bg-yellow-light w-full md:w-2/5 md:rounded-3xl">
+          <form
+            onSubmit={handleSubmit(onSubmitForm)}
+            className="flex flex-col px-24 md:px-48 py-64 gap-4">
+            <h2 className="text-4xl font-bold text-black mb-4">Login</h2>
+            <div className="flex flex-col gap-2">
+              <p className="text-xl font-bold">Username</p>
               <input
                 type="text"
-                className="w-full bg-gray-100 text-gray-900 rounded-md pl-2 mx-12 h-12 mt-2"
-                placeholder="Username"
+                className="w-full bg-gray-100 text-gray-900 rounded-md pl-2 h-12"
+                placeholder="Enter your username..."
                 {...register("username", { required: true })}
               />
             </div>
-            <div className="flex">
+            <div className="flex flex-col gap-2">
+              <p className="text-xl font-bold">Password</p>
               <input
                 type="password"
-                className="w-full bg-gray-100 text-gray-900 rounded-md pl-2 mx-12 h-12 mt-2"
-                placeholder="Password"
+                className="w-full bg-gray-100 text-gray-900 rounded-md pl-2 h-12"
+                placeholder="Enter your password..."
                 {...register("password", { required: true })}
               />
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center">
               <button
                 type="submit"
-                className="bg-yellow-dark text-brown-dark font-semibold rounded-md px-4 py-2">
+                className="bg-yellow-dark text-brown-dark font-semibold rounded-md text-lg mt-4 px-16 py-2">
                 Login
               </button>
             </div>

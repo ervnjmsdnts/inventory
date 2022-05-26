@@ -19,9 +19,11 @@ export const getServerSideProps = withAuth(async () => {
       isActive: true,
     },
     include: {
-      ingredient: {
+      ingredients: {
         select: {
+          id: true,
           name: true,
+          isActive: true,
         },
       },
     },

@@ -7,6 +7,7 @@ import { ErrorStatus, OkayStatus } from "../Status";
 import TableLayout from "../TableLayout";
 import { UpdateProductModal } from "./ProductModals";
 import NProgress from "nprogress";
+import { Listbox, Popover } from "@headlessui/react";
 
 const ProductTable = (props: ProductProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,11 +42,6 @@ const ProductTable = (props: ProductProps) => {
             <th
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
-              Id
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
               Name
             </th>
             <th
@@ -61,7 +57,7 @@ const ProductTable = (props: ProductProps) => {
             <th
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
-              Ingredient
+              Ingredients
             </th>
             <th
               scope="col"
@@ -80,11 +76,6 @@ const ProductTable = (props: ProductProps) => {
           {props.products?.map((product) => (
             <tr key={product.id}>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900">
-                  {product.id}
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
                 <div className="text-sm text-gray-900">{product.name}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
@@ -100,8 +91,12 @@ const ProductTable = (props: ProductProps) => {
                 )}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">
-                  {product.ingredient.name}
+                <div className="text-sm flex flex-wrap gap-2 max-w-xs">
+                  {product.ingredients.map((ingredient: any) => (
+                    <OkayStatus key={ingredient.id}>
+                      {ingredient.name}
+                    </OkayStatus>
+                  ))}
                 </div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
