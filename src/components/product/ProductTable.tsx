@@ -7,7 +7,6 @@ import { ErrorStatus, OkayStatus } from "../Status";
 import TableLayout from "../TableLayout";
 import { UpdateProductModal } from "./ProductModals";
 import NProgress from "nprogress";
-import { Listbox, Popover } from "@headlessui/react";
 
 const ProductTable = (props: ProductProps) => {
   const [isOpen, setIsOpen] = useState(false);
